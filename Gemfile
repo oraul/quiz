@@ -32,6 +32,10 @@ gem 'bootsnap', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem "rack-cors"
 
+# Build Swagger tooling for Rails API
+gem 'rswag-api'
+gem 'rswag-ui'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
@@ -41,6 +45,9 @@ group :development, :test do
 
   # Our fixture replacement
   gem 'factory_bot_rails'
+
+  # Use swagger for ruby
+  gem 'rswag-specs'
 
   # Use the rubocop bad smell analyzer
   gem 'rubocop', require: false
