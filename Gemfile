@@ -54,6 +54,9 @@ group :development, :test do
   gem 'rubocop-factory_bot', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+
+  # Easier way to test models
+  gem 'shoulda-matchers'
 end
 
 group :development do
