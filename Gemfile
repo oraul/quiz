@@ -39,6 +39,12 @@ group :development, :test do
 
   # Our fixture replacement
   gem "factory_bot_rails"
+
+  # Use the rubocop bad smell analyzer
+  gem "rubocop", require: false
+  gem "rubocop-factory_bot", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-rspec", require: false
 end
 
 group :development do
