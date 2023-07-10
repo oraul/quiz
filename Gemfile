@@ -36,6 +36,9 @@ group :development, :test do
 
   # Testing framework
   gem "rspec-rails"
+
+  # Our fixture replacement
+  gem "factory_bot_rails"
 end
 
 group :development do
