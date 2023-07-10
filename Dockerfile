@@ -20,7 +20,7 @@ RUN bundle install
 
 COPY . ${APP_PATH}
 
-# ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
 
 EXPOSE ${PORT}
 
