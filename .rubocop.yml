@@ -6,8 +6,9 @@ require:
 AllCops:
   NewCops: enable
   Exclude:
-    - 'db/schema.rb'
-    - 'bin/*'
+    - db/schema.rb
+    - bin/*
+    - vendor/bundle/**/*
 
 Style/Documentation:
   Enabled: false
