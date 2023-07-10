@@ -1,0 +1,146 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/disciplines":
+    get:
+      summary: Retrieves discipline list
+      tags:
+      - Disciplines
+      responses:
+        '200':
+          description: discipline found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Discipline"
+    post:
+      summary: Creates a discipline
+      tags:
+      - Disciplines
+      parameters: []
+      responses:
+        '201':
+          description: discipline created
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/DisciplineError"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Discipline"
+  "/disciplines/{id}":
+    get:
+      summary: Retrieves a discipline
+      tags:
+      - Disciplines
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: discipline found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Discipline"
+        '404':
+          description: discipline not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/RecordNotFoundError"
+    patch:
+      summary: Updates a discipline
+      tags:
+      - Disciplines
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: discipline updated
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/DisciplineError"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Discipline"
+    delete:
+      summary: Deletes a discipline
+      tags:
+      - Disciplines
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: discipline deleted
+        '404':
+          description: discipline not found
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
+components:
+  schemas:
+    RecordNotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    Discipline:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        url:
+          type: string
+          format: url
+      required:
+      - id
+      - name
+      - created_at
+      - updated_at
+      - url
+    DisciplineError:
+      type: object
+      properties:
+        name:
+          type: array
+          items:
+            type: string
