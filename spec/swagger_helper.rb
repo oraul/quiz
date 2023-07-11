@@ -58,6 +58,25 @@ RSpec.configure do |config|
               name: { type: 'array', items: { type: 'string' } }
             }
           },
+          Question: {
+            type: 'object',
+            properties: {
+              id: { type: 'string', format: 'uuid' },
+              enunciation: { type: 'string' },
+              topic_id: { type: 'string', format: 'uuid' },
+              created_at: { type: 'string', format: 'date-time' },
+              updated_at: { type: 'string', format: 'date-time' },
+              url: { type: 'string', format: 'url' }
+            },
+            required: %w[id enunciation created_at updated_at url]
+          },
+          QuestionError: {
+            type: 'object',
+            properties: {
+              enunciation: { type: 'array', items: { type: 'string' } },
+              topic: { type: 'array', items: { type: 'string' } }
+            }
+          },
           Topic: {
             type: 'object',
             properties: {

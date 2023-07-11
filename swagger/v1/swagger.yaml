@@ -100,6 +100,102 @@ paths:
           description: discipline deleted
         '404':
           description: discipline not found
+  "/questions":
+    get:
+      summary: Retrieves question list
+      tags:
+      - Questions
+      responses:
+        '200':
+          description: question found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Question"
+    post:
+      summary: Creates a question
+      tags:
+      - Questions
+      parameters: []
+      responses:
+        '201':
+          description: question created
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/QuestionError"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Question"
+  "/questions/{id}":
+    get:
+      summary: Retrieves a question
+      tags:
+      - Questions
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: question found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Question"
+        '404':
+          description: question not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/RecordNotFoundError"
+    patch:
+      summary: Updates a question
+      tags:
+      - Questions
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: question updated
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/QuestionError"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Question"
+    delete:
+      summary: Deletes a question
+      tags:
+      - Questions
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: question deleted
+        '404':
+          description: question not found
   "/topics":
     get:
       summary: Retrieves topic list
@@ -237,6 +333,43 @@ components:
       type: object
       properties:
         name:
+          type: array
+          items:
+            type: string
+    Question:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        enunciation:
+          type: string
+        topic_id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        url:
+          type: string
+          format: url
+      required:
+      - id
+      - enunciation
+      - created_at
+      - updated_at
+      - url
+    QuestionError:
+      type: object
+      properties:
+        enunciation:
+          type: array
+          items:
+            type: string
+        topic:
           type: array
           items:
             type: string
