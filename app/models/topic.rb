@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class Discipline < ApplicationRecord
+class Topic < ApplicationRecord
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
-  has_many :topics, dependent: :delete_all
+  belongs_to :discipline
 end

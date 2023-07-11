@@ -57,6 +57,25 @@ RSpec.configure do |config|
             properties: {
               name: { type: 'array', items: { type: 'string' } }
             }
+          },
+          Topic: {
+            type: 'object',
+            properties: {
+              id: { type: 'string', format: 'uuid' },
+              name: { type: 'string' },
+              discipline_id: { type: 'string', format: 'uuid' },
+              created_at: { type: 'string', format: 'date-time' },
+              updated_at: { type: 'string', format: 'date-time' },
+              url: { type: 'string', format: 'url' }
+            },
+            required: %w[id name created_at updated_at url]
+          },
+          TopicError: {
+            type: 'object',
+            properties: {
+              name: { type: 'array', items: { type: 'string' } },
+              discipline: { type: 'array', items: { type: 'string' } }
+            }
           }
         }
       }

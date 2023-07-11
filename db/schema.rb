@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_10_123821) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_10_175736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,4 +21,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_10_123821) do
     t.index ["name"], name: "index_disciplines_on_name", unique: true
   end
 
+  create_table "topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.uuid "discipline_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["discipline_id"], name: "index_topics_on_discipline_id"
+    t.index ["name"], name: "index_topics_on_name", unique: true
+  end
+
+  add_foreign_key "topics", "disciplines"
 end
