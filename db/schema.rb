@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_11_183748) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_11_192534) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "alternatives", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "description"
+    t.uuid "question_id", null: false
+    t.boolean "correct", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["description"], name: "index_alternatives_on_description"
+    t.index ["question_id"], name: "index_alternatives_on_question_id"
+  end
 
   create_table "disciplines", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
@@ -38,6 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_183748) do
     t.index ["name"], name: "index_topics_on_name", unique: true
   end
 
+  add_foreign_key "alternatives", "questions"
   add_foreign_key "questions", "topics"
   add_foreign_key "topics", "disciplines"
 end

@@ -4,6 +4,102 @@ info:
   title: API V1
   version: v1
 paths:
+  "/alternatives":
+    get:
+      summary: Retrieves alternative list
+      tags:
+      - Alternatives
+      responses:
+        '200':
+          description: alternative found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Alternative"
+    post:
+      summary: Creates an alternative
+      tags:
+      - Alternatives
+      parameters: []
+      responses:
+        '201':
+          description: alternative created
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/AlternativeError"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Alternative"
+  "/alternatives/{id}":
+    get:
+      summary: Retrieves an alternative
+      tags:
+      - Alternatives
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: alternative found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Alternative"
+        '404':
+          description: alternative not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/RecordNotFoundError"
+    patch:
+      summary: Updates an alternative
+      tags:
+      - Alternatives
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: alternative updated
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/AlternativeError"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Alternative"
+    delete:
+      summary: Deletes a alternative
+      tags:
+      - Alternatives
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: alternative deleted
+        '404':
+          description: alternative not found
   "/disciplines":
     get:
       summary: Retrieves discipline list
@@ -306,6 +402,51 @@ components:
           type: string
       required:
       - message
+    Alternative:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        description:
+          type: string
+        correct:
+          type: boolean
+        question_id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        url:
+          type: string
+          format: url
+      required:
+      - id
+      - description
+      - question_id
+      - correct
+      - created_at
+      - updated_at
+      - url
+    AlternativeError:
+      type: object
+      properties:
+        description:
+          type: array
+          items:
+            type: string
+        correct:
+          type: array
+          items:
+            type: string
+        question:
+          type: array
+          items:
+            type: string
     Discipline:
       type: object
       properties:

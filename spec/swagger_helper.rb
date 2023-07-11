@@ -41,6 +41,27 @@ RSpec.configure do |config|
             },
             required: %w[message]
           },
+          Alternative: {
+            type: 'object',
+            properties: {
+              id: { type: 'string', format: 'uuid' },
+              description: { type: 'string' },
+              correct: { type: 'boolean' },
+              question_id: { type: 'string', format: 'uuid' },
+              created_at: { type: 'string', format: 'date-time' },
+              updated_at: { type: 'string', format: 'date-time' },
+              url: { type: 'string', format: 'url' }
+            },
+            required: %w[id description question_id correct created_at updated_at url]
+          },
+          AlternativeError: {
+            type: 'object',
+            properties: {
+              description: { type: 'array', items: { type: 'string' } },
+              correct: { type: 'array', items: { type: 'string' } },
+              question: { type: 'array', items: { type: 'string' } }
+            }
+          },
           Discipline: {
             type: 'object',
             properties: {
