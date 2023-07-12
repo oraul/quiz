@@ -22,6 +22,9 @@ RSpec.configure do |config|
         version: 'v1'
       },
       paths: {},
+      security: [
+        { bearerAuth: [] }
+      ],
       servers: [
         {
           url: 'https://{defaultHost}',
@@ -33,7 +36,21 @@ RSpec.configure do |config|
         }
       ],
       components: {
+        securitySchemes: {
+          bearerAuth: {
+            type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT'
+          }
+        },
         schemas: {
+          UnauthorizedError: {
+            type: 'object',
+            properties: {
+              message: { type: 'string' }
+            },
+            required: %w[message]
+          },
           RecordNotFoundError: {
             type: 'object',
             properties: {

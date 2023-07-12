@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Authorizable do
-  include AuthorizeMock
+  include AuthorizationHelper
 
   subject(:authorizable) { dummy_class(authorization) }
 

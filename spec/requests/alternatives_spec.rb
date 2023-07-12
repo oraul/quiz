@@ -17,6 +17,14 @@ RSpec.describe '/alternatives' do
 
         run_test!
       end
+
+      response(401, 'unauthorized') do
+        schema '$ref' => '#/components/schemas/UnauthorizedError'
+
+        let(:Authorization) { nil }
+
+        run_test!
+      end
     end
 
     post 'Creates an alternative' do
@@ -37,6 +45,16 @@ RSpec.describe '/alternatives' do
 
           assert_response_matches_metadata(example.metadata)
         end
+      end
+
+      response(401, 'unauthorized') do
+        schema '$ref' => '#/components/schemas/UnauthorizedError'
+
+        let(:alternative) { {} }
+
+        let(:Authorization) { nil }
+
+        run_test!
       end
 
       response '422', 'invalid request' do
@@ -67,6 +85,16 @@ RSpec.describe '/alternatives' do
         schema '$ref' => '#/components/schemas/Alternative'
 
         let(:id) { create(:alternative).id }
+
+        run_test!
+      end
+
+      response(401, 'unauthorized') do
+        schema '$ref' => '#/components/schemas/UnauthorizedError'
+
+        let(:Authorization) { nil }
+
+        let(:id) { 'id' }
 
         run_test!
       end
@@ -107,6 +135,16 @@ RSpec.describe '/alternatives' do
         end
       end
 
+      response(401, 'unauthorized') do
+        schema '$ref' => '#/components/schemas/UnauthorizedError'
+
+        let(:alternative) { {} }
+
+        let(:Authorization) { nil }
+
+        run_test!
+      end
+
       response '422', 'invalid request' do
         schema '$ref' => '#/components/schemas/AlternativeError'
 
@@ -133,6 +171,18 @@ RSpec.describe '/alternatives' do
 
           assert_response_matches_metadata(example.metadata)
         end
+      end
+
+      response(401, 'unauthorized') do
+        schema '$ref' => '#/components/schemas/UnauthorizedError'
+
+        let(:id) { 'id' }
+
+        let(:alternative) { {} }
+
+        let(:Authorization) { nil }
+
+        run_test!
       end
 
       response '404', 'alternative not found' do

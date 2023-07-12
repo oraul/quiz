@@ -32,4 +32,5 @@
 en:
   error:
     message:
+      authorization_error: 'Authorization error'
       record_not_found: 'Record not found'

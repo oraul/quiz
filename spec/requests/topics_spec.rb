@@ -17,6 +17,14 @@ RSpec.describe '/topics' do
 
         run_test!
       end
+
+      response(401, 'unauthorized') do
+        schema '$ref' => '#/components/schemas/UnauthorizedError'
+
+        let(:Authorization) { nil }
+
+        run_test!
+      end
     end
 
     post 'Creates a topic' do
@@ -37,6 +45,16 @@ RSpec.describe '/topics' do
 
           assert_response_matches_metadata(example.metadata)
         end
+      end
+
+      response(401, 'unauthorized') do
+        schema '$ref' => '#/components/schemas/UnauthorizedError'
+
+        let(:Authorization) { nil }
+
+        let(:topic) { {} }
+
+        run_test!
       end
 
       response '422', 'invalid request' do
@@ -67,6 +85,16 @@ RSpec.describe '/topics' do
         schema '$ref' => '#/components/schemas/Topic'
 
         let(:id) { create(:topic).id }
+
+        run_test!
+      end
+
+      response(401, 'unauthorized') do
+        schema '$ref' => '#/components/schemas/UnauthorizedError'
+
+        let(:Authorization) { nil }
+
+        let(:id) { 'id' }
 
         run_test!
       end
@@ -107,6 +135,16 @@ RSpec.describe '/topics' do
         end
       end
 
+      response(401, 'unauthorized') do
+        schema '$ref' => '#/components/schemas/UnauthorizedError'
+
+        let(:Authorization) { nil }
+
+        let(:topic) { {} }
+
+        run_test!
+      end
+
       response '422', 'invalid request' do
         schema '$ref' => '#/components/schemas/TopicError'
 
@@ -133,6 +171,16 @@ RSpec.describe '/topics' do
 
           assert_response_matches_metadata(example.metadata)
         end
+      end
+
+      response(401, 'unauthorized') do
+        schema '$ref' => '#/components/schemas/UnauthorizedError'
+
+        let(:Authorization) { nil }
+
+        let(:id) { 'id' }
+
+        run_test!
       end
 
       response '404', 'topic not found' do

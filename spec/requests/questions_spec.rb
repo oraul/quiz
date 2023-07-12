@@ -10,10 +10,18 @@ RSpec.describe '/questions' do
       produces 'application/json'
 
       response '200', 'question found' do
+        let(:question) { create(:question) }
+
         schema type: :array,
                items: { '$ref' => '#/components/schemas/Question' }
 
-        let(:question) { create(:question) }
+        run_test!
+      end
+
+      response(401, 'unauthorized') do
+        schema '$ref' => '#/components/schemas/UnauthorizedError'
+
+        let(:Authorization) { nil }
 
         run_test!
       end
@@ -37,6 +45,16 @@ RSpec.describe '/questions' do
 
           assert_response_matches_metadata(example.metadata)
         end
+      end
+
+      response(401, 'unauthorized') do
+        schema '$ref' => '#/components/schemas/UnauthorizedError'
+
+        let(:Authorization) { nil }
+
+        let(:question) { {} }
+
+        run_test!
       end
 
       response '422', 'invalid request' do
@@ -64,9 +82,19 @@ RSpec.describe '/questions' do
       parameter name: :id, in: :path, type: :string
 
       response '200', 'question found' do
+        let(:id) { create(:question).id }
+
         schema '$ref' => '#/components/schemas/Question'
 
-        let(:id) { create(:question).id }
+        run_test!
+      end
+
+      response(401, 'unauthorized') do
+        schema '$ref' => '#/components/schemas/UnauthorizedError'
+
+        let(:Authorization) { nil }
+
+        let(:id) { 'id' }
 
         run_test!
       end
@@ -107,6 +135,16 @@ RSpec.describe '/questions' do
         end
       end
 
+      response(401, 'unauthorized') do
+        schema '$ref' => '#/components/schemas/UnauthorizedError'
+
+        let(:Authorization) { nil }
+
+        let(:question) { {} }
+
+        run_test!
+      end
+
       response '422', 'invalid request' do
         schema '$ref' => '#/components/schemas/QuestionError'
 
@@ -133,6 +171,16 @@ RSpec.describe '/questions' do
 
           assert_response_matches_metadata(example.metadata)
         end
+      end
+
+      response(401, 'unauthorized') do
+        schema '$ref' => '#/components/schemas/UnauthorizedError'
+
+        let(:Authorization) { nil }
+
+        let(:id) { 'id' }
+
+        run_test!
       end
 
       response '404', 'question not found' do
