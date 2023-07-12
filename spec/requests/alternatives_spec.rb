@@ -13,7 +13,7 @@ RSpec.describe '/alternatives' do
         schema type: :array,
                items: { '$ref' => '#/components/schemas/Alternative' }
 
-        let(:question) { create(:alternative) }
+        let(:alternative) { create(:alternative) }
 
         run_test!
       end
