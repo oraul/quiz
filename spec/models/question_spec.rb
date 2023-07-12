@@ -13,4 +13,8 @@ RSpec.describe Question do
     it { is_expected.to belong_to(:topic) }
     it { is_expected.to have_many(:alternatives).dependent(:delete_all) }
   end
+
+  describe 'accepts nested attributes' do
+    it { is_expected.to accept_nested_attributes_for(:alternatives).allow_destroy(true) }
+  end
 end

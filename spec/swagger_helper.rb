@@ -112,7 +112,9 @@ RSpec.configure do |config|
             type: 'object',
             properties: {
               enunciation: { type: 'array', items: { type: 'string' } },
-              topic: { type: 'array', items: { type: 'string' } }
+              topic: { type: 'array', items: { type: 'string' } },
+              'alternatives.description': { type: 'array', items: { type: 'string' } },
+              'alternatives.correct': { type: 'array', items: { type: 'string' } }
             }
           },
           Topic: {

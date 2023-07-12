@@ -632,6 +632,14 @@ components:
           type: array
           items:
             type: string
+        alternatives.description:
+          type: array
+          items:
+            type: string
+        alternatives.correct:
+          type: array
+          items:
+            type: string
     Topic:
       type: object
       properties:

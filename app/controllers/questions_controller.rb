@@ -50,6 +50,6 @@ class QuestionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def question_params
-    params.require(:question).permit(:enunciation, :topic_id)
+    params.require(:question).permit(:enunciation, :topic_id, alternatives_attributes: %i[id description correct])
   end
 end

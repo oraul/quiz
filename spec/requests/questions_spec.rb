@@ -10,7 +10,7 @@ RSpec.describe '/questions' do
       produces 'application/json'
 
       response '200', 'question found' do
-        let(:question) { create(:question) }
+        let(:question) { create(:question, :with_alternatives) }
 
         schema type: :array,
                items: { '$ref' => '#/components/schemas/Question' }
@@ -37,11 +37,26 @@ RSpec.describe '/questions' do
 
       response '201', 'question created' do
         let(:question) do
-          { enunciation: "Question #{Time.zone.now}", topic_id: create(:topic).id }
+          {
+            enunciation: "Question #{Time.zone.now}",
+            topic_id: create(:topic).id,
+            alternatives_attributes: [
+              {
+                description: 'Wrong Alternative',
+                correct: false
+              },
+              {
+                description: 'Correct Alternative',
+                correct: true
+              }
+            ]
+          }
         end
 
         it 'returns a 201 response' do |example|
-          expect { submit_request(example.metadata) }.to change(Question, :count).by(1)
+          expect do
+            submit_request(example.metadata)
+          end.to change(Question, :count).by(1).and(change(Alternative, :count).by(2))
 
           assert_response_matches_metadata(example.metadata)
         end
@@ -61,7 +76,7 @@ RSpec.describe '/questions' do
         schema '$ref' => '#/components/schemas/QuestionError'
 
         let(:question) do
-          { enunciation: nil, topic_id: nil }
+          { enunciation: nil, topic_id: nil, alternatives_attributes: [{ description: nil, correct: nil }] }
         end
 
         it 'returns a 422 response' do |example|
@@ -82,7 +97,7 @@ RSpec.describe '/questions' do
       parameter name: :id, in: :path, type: :string
 
       response '200', 'question found' do
-        let(:id) { create(:question).id }
+        let(:id) { create(:question, :with_alternatives).id }
 
         schema '$ref' => '#/components/schemas/Question'
 
@@ -117,19 +132,34 @@ RSpec.describe '/questions' do
       parameter name: :id, in: :path, type: :string
       parameter name: :question, in: :body, schema: { '$ref' => '#/components/schemas/Question' }
 
-      let(:record) { create(:question) }
+      let(:record) { create(:question, :with_alternatives) }
+
+      let(:record_child) { record.alternatives.first }
 
       let(:id) { record.id }
 
       response '200', 'question updated' do
         let(:question) do
-          { enunciation: "Question #{Time.zone.now}" }
+          {
+            enunciation: "Question #{Time.zone.now}",
+            alternatives_attributes: [
+              { id: record_child.id, description: "Alternative #{Time.zone.now}", correct: false }
+            ]
+          }
         end
 
         it 'returns a 200 response' do |example|
           submit_request(example.metadata)
 
-          expect(record.reload).to have_attributes(**question)
+          expect(record.reload).to have_attributes(**question.slice(:enunciation))
+
+          assert_response_matches_metadata(example.metadata)
+        end
+
+        it 'updates selected alternative' do |example|
+          submit_request(example.metadata)
+
+          expect(record_child.reload).to have_attributes(**question[:alternatives_attributes].first)
 
           assert_response_matches_metadata(example.metadata)
         end
@@ -149,7 +179,7 @@ RSpec.describe '/questions' do
         schema '$ref' => '#/components/schemas/QuestionError'
 
         let(:question) do
-          { enunciation: nil, topic_id: nil }
+          { enunciation: nil, topic_id: nil, alternatives_attributes: [{ description: nil, correct: nil }] }
         end
 
         run_test!
@@ -164,10 +194,12 @@ RSpec.describe '/questions' do
       parameter name: :id, in: :path, type: :string
 
       response '204', 'question deleted' do
-        let(:id) { create(:question).id }
+        let(:id) { create(:question, :with_alternatives).id }
 
         it 'returns a 204 response' do |example|
-          expect { submit_request(example.metadata) }.to change { Question.where(id:).count }.by(-1)
+          expect { submit_request(example.metadata) }.to(
+            change { Question.where(id:).count }.by(-1).and(change { Alternative.where(question_id: id) }.to([]))
+          )
 
           assert_response_matches_metadata(example.metadata)
         end
