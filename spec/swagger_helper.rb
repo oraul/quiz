@@ -121,6 +121,7 @@ RSpec.configure do |config|
               id: { type: 'string', format: 'uuid' },
               enunciation: { type: 'string' },
               topic_id: { type: 'string', format: 'uuid' },
+              alternatives: { type: 'array', items: { '$ref' => '#/components/schemas/Alternative' } },
               created_at: { type: 'string', format: 'date-time' },
               updated_at: { type: 'string', format: 'date-time' },
               url: { type: 'string', format: 'url' }

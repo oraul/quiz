@@ -767,6 +767,10 @@ components:
         topic_id:
           type: string
           format: uuid
+        alternatives:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Alternative"
         created_at:
           type: string
           format: date-time
