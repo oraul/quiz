@@ -2,7 +2,6 @@
 
 Rails.application.routes.draw do
   resources :answers
-  resources :alternatives
   resources :questions
   resources :disciplines
   resources :topics

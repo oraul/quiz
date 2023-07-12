@@ -66,10 +66,9 @@ RSpec.configure do |config|
               correct: { type: 'boolean' },
               question_id: { type: 'string', format: 'uuid' },
               created_at: { type: 'string', format: 'date-time' },
-              updated_at: { type: 'string', format: 'date-time' },
-              url: { type: 'string', format: 'url' }
+              updated_at: { type: 'string', format: 'date-time' }
             },
-            required: %w[id description question_id correct created_at updated_at url]
+            required: %w[id description question_id correct created_at updated_at]
           },
           AlternativeError: {
             type: 'object',

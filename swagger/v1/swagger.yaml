@@ -4,128 +4,6 @@ info:
   title: API V1
   version: v1
 paths:
-  "/alternatives":
-    get:
-      summary: Retrieves alternative list
-      tags:
-      - Alternatives
-      responses:
-        '200':
-          description: alternative found
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Alternative"
-        '401':
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/UnauthorizedError"
-    post:
-      summary: Creates an alternative
-      tags:
-      - Alternatives
-      parameters: []
-      responses:
-        '201':
-          description: alternative created
-        '401':
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/UnauthorizedError"
-        '422':
-          description: invalid request
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/AlternativeError"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/Alternative"
-  "/alternatives/{id}":
-    get:
-      summary: Retrieves an alternative
-      tags:
-      - Alternatives
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: alternative found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Alternative"
-        '401':
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/UnauthorizedError"
-        '404':
-          description: alternative not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/RecordNotFoundError"
-    patch:
-      summary: Updates an alternative
-      tags:
-      - Alternatives
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: alternative updated
-        '401':
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/UnauthorizedError"
-        '422':
-          description: invalid request
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/AlternativeError"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/Alternative"
-    delete:
-      summary: Deletes an alternative
-      tags:
-      - Alternatives
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '204':
-          description: alternative deleted
-        '401':
-          description: unauthorized
-        '404':
-          description: alternative not found
   "/answers":
     get:
       summary: Retrieves answer list
@@ -661,9 +539,6 @@ components:
         updated_at:
           type: string
           format: date-time
-        url:
-          type: string
-          format: url
       required:
       - id
       - description
@@ -671,7 +546,6 @@ components:
       - correct
       - created_at
       - updated_at
-      - url
     AlternativeError:
       type: object
       properties:
