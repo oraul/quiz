@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Alternative do
   describe 'validations' do
     it { is_expected.to validate_presence_of(:description) }
-    it { is_expected.to validate_inclusion_of(:correct).in_array([true, false]) }
+    it { is_expected.to allow_values([true, false]).for(:correct) }
   end
 
   describe 'associations' do
