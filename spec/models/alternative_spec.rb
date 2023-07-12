@@ -10,5 +10,6 @@ RSpec.describe Alternative do
 
   describe 'associations' do
     it { is_expected.to belong_to(:question) }
+    it { is_expected.to have_many(:answers).dependent(:delete_all) }
   end
 end

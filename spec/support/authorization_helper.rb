@@ -2,6 +2,8 @@
 
 RSpec.shared_context 'with authorization header', type: :request do
   let(:Authorization) { bearer_token_mock }
+
+  let(:current_user) { build(:user_entity) }
 end
 
 module AuthorizationHelper

@@ -110,7 +110,7 @@ paths:
             schema:
               "$ref": "#/components/schemas/Alternative"
     delete:
-      summary: Deletes a alternative
+      summary: Deletes an alternative
       tags:
       - Alternatives
       parameters:
@@ -126,6 +126,128 @@ paths:
           description: unauthorized
         '404':
           description: alternative not found
+  "/answers":
+    get:
+      summary: Retrieves answer list
+      tags:
+      - Answers
+      responses:
+        '200':
+          description: answer found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Answer"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UnauthorizedError"
+    post:
+      summary: Creates an answer
+      tags:
+      - Answers
+      parameters: []
+      responses:
+        '201':
+          description: answer created
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UnauthorizedError"
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/AnswerError"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Answer"
+  "/answers/{id}":
+    get:
+      summary: Retrieves an answer
+      tags:
+      - Answers
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: answer found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Answer"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UnauthorizedError"
+        '404':
+          description: answer not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/RecordNotFoundError"
+    patch:
+      summary: Updates an answer
+      tags:
+      - Answers
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: answer updated
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UnauthorizedError"
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/AnswerError"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Answer"
+    delete:
+      summary: Deletes an answer
+      tags:
+      - Answers
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: answer deleted
+        '401':
+          description: unauthorized
+        '404':
+          description: answer not found
   "/disciplines":
     get:
       summary: Retrieves discipline list
@@ -562,6 +684,45 @@ components:
           items:
             type: string
         question:
+          type: array
+          items:
+            type: string
+    Answer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        alternative_id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        url:
+          type: string
+          format: url
+      required:
+      - id
+      - user_id
+      - alternative_id
+      - created_at
+      - updated_at
+      - url
+    AnswerError:
+      type: object
+      properties:
+        user_id:
+          type: array
+          items:
+            type: string
+        alternative:
           type: array
           items:
             type: string

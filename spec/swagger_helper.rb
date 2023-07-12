@@ -79,6 +79,25 @@ RSpec.configure do |config|
               question: { type: 'array', items: { type: 'string' } }
             }
           },
+          Answer: {
+            type: 'object',
+            properties: {
+              id: { type: 'string', format: 'uuid' },
+              user_id: { type: 'string', format: 'uuid' },
+              alternative_id: { type: 'string', format: 'uuid' },
+              created_at: { type: 'string', format: 'date-time' },
+              updated_at: { type: 'string', format: 'date-time' },
+              url: { type: 'string', format: 'url' }
+            },
+            required: %w[id user_id alternative_id created_at updated_at url]
+          },
+          AnswerError: {
+            type: 'object',
+            properties: {
+              user_id: { type: 'array', items: { type: 'string' } },
+              alternative: { type: 'array', items: { type: 'string' } }
+            }
+          },
           Discipline: {
             type: 'object',
             properties: {

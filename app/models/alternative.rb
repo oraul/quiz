@@ -5,4 +5,6 @@ class Alternative < ApplicationRecord
   validates :correct, inclusion: { in: [true, false] }
 
   belongs_to :question
+
+  has_many :answers, dependent: :delete_all
 end
