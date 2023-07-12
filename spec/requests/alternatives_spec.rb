@@ -156,7 +156,7 @@ RSpec.describe '/alternatives' do
       end
     end
 
-    delete 'Deletes a alternative' do
+    delete 'Deletes an alternative' do
       tags 'Alternatives'
 
       consumes 'application/json'
