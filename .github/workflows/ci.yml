@@ -42,3 +42,4 @@ jobs:
           QUIZ_DATABASE_PASSWORD: postgres
           QUIZ_DATABASE_PORT: 5432
           QUIZ_DATABASE_USERNAME: postgres
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
