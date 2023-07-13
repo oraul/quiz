@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :most_answered do
     get :disciplines
   end
+  resources :alternatives, only: [:show]
   resources :answers
   resources :questions
   resources :disciplines

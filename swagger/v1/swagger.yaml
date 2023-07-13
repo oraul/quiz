@@ -4,6 +4,36 @@ info:
   title: API V1
   version: v1
 paths:
+  "/alternatives/{id}":
+    get:
+      summary: Retrieves an alternative
+      tags:
+      - Alternatives
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: alternative found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Alternative"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UnauthorizedError"
+        '404':
+          description: alternative not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/RecordNotFoundError"
   "/answers":
     get:
       summary: Retrieves answer list
