@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  include ActionController::Caching
+
   include Authorizable
 
   rescue_from AuthorizationError, with: :authorization_error
