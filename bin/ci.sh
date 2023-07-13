@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+RAILS_ENV=test
+
 # Check bad smell
 bin/rubocop
 

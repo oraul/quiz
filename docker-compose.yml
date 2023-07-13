@@ -2,6 +2,7 @@ version: "3.9"
 
 volumes:
   db-volume:
+  redis-volume:
 
 services:
   app:
@@ -12,11 +13,13 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - redis
     environment:
       - QUIZ_DATABASE_HOST=db
       - QUIZ_DATABASE_PASSWORD=postgres
       - QUIZ_DATABASE_PORT=5432
       - QUIZ_DATABASE_USERNAME=postgres
+      - REDIS_URL=redis://redis:6379/1
 
   db:
     image: postgres:15.3-alpine3.18
@@ -32,3 +35,10 @@ services:
       retries: 3
     volumes:
       - db-volume:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7.0.12-alpine3.18
+    volumes:
+      - redis-volume:/usr/local/etc/redis
+    ports:
+      - "6379:6379"
