@@ -51,7 +51,7 @@ RSpec.describe '/answers' do
         it 'returns alternative location' do |example|
           submit_request(example.metadata)
 
-          expect(response.location).to eq(alternative_url(response.parsed_body['alternative_id']))
+          expect(response).to have_attributes(location: alternative_url(response.parsed_body['alternative_id']))
         end
       end
 
