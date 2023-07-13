@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     get :disciplines
   end
   resources :alternatives, only: [:show]
-  resources :answers
+  resources :answers, only: %i[index show create destroy]
   resources :questions
   resources :disciplines
   resources :topics

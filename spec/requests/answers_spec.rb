@@ -116,56 +116,6 @@ RSpec.describe '/answers' do
       end
     end
 
-    patch 'Updates an answer' do
-      tags 'Answers'
-
-      consumes 'application/json'
-      produces 'application/json'
-
-      parameter name: :id, in: :path, type: :string
-      parameter name: :answer, in: :body, schema: { '$ref' => '#/components/schemas/Answer' }
-
-      let(:record) { create(:answer) }
-
-      let(:id) { record.id }
-
-      response '200', 'answer updated' do
-        schema '$ref' => '#/components/schemas/Answer'
-
-        let(:answer) do
-          { user_id: current_user.sub, alternative_id: create(:alternative).id }
-        end
-
-        it 'returns a 200 response' do |example|
-          submit_request(example.metadata)
-
-          expect(record.reload).to have_attributes(**answer)
-
-          assert_response_matches_metadata(example.metadata)
-        end
-      end
-
-      response(401, 'unauthorized') do
-        schema '$ref' => '#/components/schemas/UnauthorizedError'
-
-        let(:answer) { {} }
-
-        let(:Authorization) { nil }
-
-        run_test!
-      end
-
-      response '422', 'invalid request' do
-        schema '$ref' => '#/components/schemas/AnswerError'
-
-        let(:answer) do
-          { user_id: nil, alternative_id: nil }
-        end
-
-        run_test!
-      end
-    end
-
     delete 'Deletes an answer' do
       tags 'Answers'
 

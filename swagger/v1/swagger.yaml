@@ -113,40 +113,6 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/RecordNotFoundError"
-    patch:
-      summary: Updates an answer
-      tags:
-      - Answers
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: answer updated
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Answer"
-        '401':
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/UnauthorizedError"
-        '422':
-          description: invalid request
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/AnswerError"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/Answer"
     delete:
       summary: Deletes an answer
       tags:

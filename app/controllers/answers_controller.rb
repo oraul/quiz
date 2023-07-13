@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AnswersController < ApplicationController
-  before_action :set_answer, only: %i[show update destroy]
+  before_action :set_answer, only: %i[show destroy]
 
   # GET /answers
   # GET /answers.json
@@ -20,16 +20,6 @@ class AnswersController < ApplicationController
 
     if @answer.save
       render :show, status: :created, location: alternative_url(@answer.alternative_id)
-    else
-      render json: @answer.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /answers/1
-  # PATCH/PUT /answers/1.json
-  def update
-    if @answer.update(answer_params)
-      render :show, status: :ok, location: @answer
     else
       render json: @answer.errors, status: :unprocessable_entity
     end
