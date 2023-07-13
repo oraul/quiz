@@ -9,13 +9,30 @@ RSpec.describe '/questions' do
 
       produces 'application/json'
 
+      parameter name: :by_topic_id, in: :query, type: :string, format: :uuid, required: false
+
       response '200', 'question found' do
-        let(:question) { create(:question, :with_alternatives) }
+        let(:questions) { create_list(:question, 2, :with_alternatives) }
 
         schema type: :array,
                items: { '$ref' => '#/components/schemas/Question' }
 
-        run_test!
+        before { |example| submit_request(example.metadata) }
+
+        context 'without query params' do
+          it 'returns a 200 response' do |example|
+            assert_response_matches_metadata(example.metadata)
+          end
+        end
+
+        context 'with by_topic_id' do
+          let(:by_topic_id) { questions.first.topic_id }
+
+          it 'returns a 200 response' do |example|
+            expect(response.parsed_body.pluck('id')).to contain_exactly(questions.first.id)
+            assert_response_matches_metadata(example.metadata)
+          end
+        end
       end
 
       response(401, 'unauthorized') do

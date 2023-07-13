@@ -253,6 +253,13 @@ paths:
       summary: Retrieves question list
       tags:
       - Questions
+      parameters:
+      - name: by_topic_id
+        in: query
+        format: uuid
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           description: question found

@@ -7,4 +7,6 @@ class Question < ApplicationRecord
   has_many :alternatives, dependent: :delete_all
 
   accepts_nested_attributes_for :alternatives, allow_destroy: true
+
+  scope :by_topic_id, ->(topic_id) { where(topic_id:) }
 end

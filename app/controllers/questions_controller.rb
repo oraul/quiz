@@ -3,10 +3,12 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: %i[show update destroy]
 
+  has_scope :by_topic_id, only: :index
+
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    @questions = apply_scopes(Question).all
   end
 
   # GET /questions/1

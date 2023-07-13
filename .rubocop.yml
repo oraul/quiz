@@ -35,6 +35,7 @@ RSpec:
 RSpec/NestedGroups:
   AllowedGroups:
     - path
+    - response
 
 RSpec/VariableName:
   AllowedPatterns:
