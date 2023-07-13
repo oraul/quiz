@@ -94,7 +94,7 @@ RSpec.configure do |config|
             type: 'object',
             properties: {
               user_id: { type: 'array', items: { type: 'string' } },
-              alternative: { type: 'array', items: { type: 'string' } }
+              alternative_id: { type: 'array', items: { type: 'string' } }
             }
           },
           Discipline: {

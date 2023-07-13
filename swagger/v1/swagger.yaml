@@ -690,7 +690,7 @@ components:
           type: array
           items:
             type: string
-        alternative:
+        alternative_id:
           type: array
           items:
             type: string

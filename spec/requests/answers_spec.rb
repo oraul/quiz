@@ -47,6 +47,12 @@ RSpec.describe '/answers' do
 
           assert_response_matches_metadata(example.metadata)
         end
+
+        it 'returns alternative location' do |example|
+          submit_request(example.metadata)
+
+          expect(response.location).to eq(alternative_url(response.parsed_body['alternative_id']))
+        end
       end
 
       response(401, 'unauthorized') do
