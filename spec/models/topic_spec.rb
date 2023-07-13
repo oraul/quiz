@@ -11,5 +11,6 @@ RSpec.describe Topic do
 
   describe 'associations' do
     it { is_expected.to belong_to(:discipline) }
+    it { is_expected.to have_many(:questions).dependent(:delete_all) }
   end
 end
