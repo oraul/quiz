@@ -36,6 +36,8 @@ RSpec.describe '/topics' do
       parameter name: :topic, in: :body, schema: { '$ref' => '#/components/schemas/Topic' }
 
       response '201', 'topic created' do
+        schema '$ref' => '#/components/schemas/Topic'
+
         let(:topic) do
           { name: "Topic #{Time.zone.now}", discipline_id: create(:discipline).id }
         end
@@ -122,6 +124,8 @@ RSpec.describe '/topics' do
       let(:id) { record.id }
 
       response '200', 'topic updated' do
+        schema '$ref' => '#/components/schemas/Topic'
+
         let(:topic) do
           { name: "Topic #{Time.zone.now}", discipline_id: create(:discipline).id }
         end

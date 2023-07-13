@@ -63,6 +63,8 @@ RSpec.describe '/questions' do
       parameter name: :question, in: :body, schema: { '$ref' => '#/components/schemas/Question' }
 
       response '201', 'question created' do
+        schema '$ref' => '#/components/schemas/Question'
+
         let(:question) do
           {
             enunciation: "Question #{Time.zone.now}",
@@ -124,9 +126,9 @@ RSpec.describe '/questions' do
       parameter name: :id, in: :path, type: :string
 
       response '200', 'question found' do
-        let(:id) { create(:question, :with_alternatives).id }
-
         schema '$ref' => '#/components/schemas/Question'
+
+        let(:id) { create(:question, :with_alternatives).id }
 
         run_test!
       end
@@ -166,6 +168,8 @@ RSpec.describe '/questions' do
       let(:id) { record.id }
 
       response '200', 'question updated' do
+        schema '$ref' => '#/components/schemas/Question'
+
         let(:question) do
           {
             enunciation: "Question #{Time.zone.now}",

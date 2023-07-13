@@ -36,6 +36,8 @@ RSpec.describe '/disciplines' do
       parameter name: :discipline, in: :body, schema: { '$ref' => '#/components/schemas/Discipline' }
 
       response '201', 'discipline created' do
+        schema '$ref' => '#/components/schemas/Discipline'
+
         let(:discipline) do
           { name: "Discipline #{Time.zone.now}" }
         end
@@ -122,6 +124,8 @@ RSpec.describe '/disciplines' do
       let(:id) { record.id }
 
       response '200', 'discipline updated' do
+        schema '$ref' => '#/components/schemas/Discipline'
+
         let(:discipline) do
           { name: "Discipline #{Time.zone.now}" }
         end

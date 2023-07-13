@@ -36,6 +36,8 @@ RSpec.describe '/answers' do
       parameter name: :answer, in: :body, schema: { '$ref' => '#/components/schemas/Answer' }
 
       response '201', 'answer created' do
+        schema '$ref' => '#/components/schemas/Answer'
+
         let(:answer) do
           { user_id: current_user.sub, alternative_id: create(:alternative).id }
         end
@@ -122,6 +124,8 @@ RSpec.describe '/answers' do
       let(:id) { record.id }
 
       response '200', 'answer updated' do
+        schema '$ref' => '#/components/schemas/Answer'
+
         let(:answer) do
           { user_id: current_user.sub, alternative_id: create(:alternative).id }
         end

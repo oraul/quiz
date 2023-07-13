@@ -32,6 +32,10 @@ paths:
       responses:
         '201':
           description: answer created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Answer"
         '401':
           description: unauthorized
           content:
@@ -92,6 +96,10 @@ paths:
       responses:
         '200':
           description: answer updated
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Answer"
         '401':
           description: unauthorized
           content:
@@ -154,6 +162,10 @@ paths:
       responses:
         '201':
           description: discipline created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Discipline"
         '401':
           description: unauthorized
           content:
@@ -214,6 +226,10 @@ paths:
       responses:
         '200':
           description: discipline updated
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Discipline"
         '401':
           description: unauthorized
           content:
@@ -308,6 +324,10 @@ paths:
       responses:
         '201':
           description: question created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Question"
         '401':
           description: unauthorized
           content:
@@ -368,6 +388,10 @@ paths:
       responses:
         '200':
           description: question updated
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Question"
         '401':
           description: unauthorized
           content:
@@ -430,6 +454,10 @@ paths:
       responses:
         '201':
           description: topic created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Topic"
         '401':
           description: unauthorized
           content:
@@ -490,6 +518,10 @@ paths:
       responses:
         '200':
           description: topic updated
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Topic"
         '401':
           description: unauthorized
           content:
