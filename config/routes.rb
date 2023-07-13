@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :most_answered do
+    get :disciplines
+  end
   resources :answers
   resources :questions
   resources :disciplines

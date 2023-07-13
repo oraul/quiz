@@ -114,6 +114,16 @@ RSpec.configure do |config|
               name: { type: 'array', items: { type: 'string' } }
             }
           },
+          MostAnswered: {
+            Discipline: {
+              type: 'object',
+              properties: {
+                id: { type: 'string', format: 'uuid' },
+                name: { type: 'string' },
+                answers_count: { type: 'integer' }
+              }
+            }
+          },
           Question: {
             type: 'object',
             properties: {

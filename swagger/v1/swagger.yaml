@@ -248,6 +248,26 @@ paths:
           description: unauthorized
         '404':
           description: discipline not found
+  "/most_answered/disciplines":
+    get:
+      summary: Retrieves most answered discipline list
+      tags:
+      - Most Answered
+      responses:
+        '200':
+          description: most answered found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/MostAnswered/Discipline"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UnauthorizedError"
   "/questions":
     get:
       summary: Retrieves question list
@@ -642,6 +662,17 @@ components:
           type: array
           items:
             type: string
+    MostAnswered:
+      Discipline:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+          name:
+            type: string
+          answers_count:
+            type: integer
     Question:
       type: object
       properties:
