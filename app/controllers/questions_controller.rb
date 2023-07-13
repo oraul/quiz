@@ -3,7 +3,7 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: %i[show update destroy]
 
-  has_scope :by_topic_id, only: :index
+  has_scope :by_topic_id, :by_enunciation_like, only: :index
 
   # GET /questions
   # GET /questions.json

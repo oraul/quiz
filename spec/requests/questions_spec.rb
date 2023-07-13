@@ -10,6 +10,7 @@ RSpec.describe '/questions' do
       produces 'application/json'
 
       parameter name: :by_topic_id, in: :query, type: :string, format: :uuid, required: false
+      parameter name: :by_enunciation_like, in: :query, type: :string, required: false
 
       response '200', 'question found' do
         let(:questions) { create_list(:question, 2, :with_alternatives) }
@@ -27,6 +28,15 @@ RSpec.describe '/questions' do
 
         context 'with by_topic_id' do
           let(:by_topic_id) { questions.first.topic_id }
+
+          it 'returns a 200 response' do |example|
+            expect(response.parsed_body.pluck('id')).to contain_exactly(questions.first.id)
+            assert_response_matches_metadata(example.metadata)
+          end
+        end
+
+        context 'with by_enunciation_like' do
+          let(:by_enunciation_like) { questions.first.enunciation }
 
           it 'returns a 200 response' do |example|
             expect(response.parsed_body.pluck('id')).to contain_exactly(questions.first.id)

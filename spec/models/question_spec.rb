@@ -33,4 +33,20 @@ RSpec.describe Question do
       it { is_expected.to be_empty }
     end
   end
+
+  describe '.by_enunciation_like' do
+    subject(:by_enunciation_like) { described_class.by_enunciation_like(enunciation) }
+
+    context 'with part of enunciation and case insensitive' do
+      let(:enunciation) { question.enunciation.downcase[2..4] }
+
+      it { is_expected.to match_array(question) }
+    end
+
+    context 'with unknown enunciation' do
+      let(:enunciation) { 'unknown' }
+
+      it { is_expected.to be_empty }
+    end
+  end
 end
