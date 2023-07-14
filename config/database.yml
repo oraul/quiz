@@ -25,19 +25,19 @@ default: &default
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user running Rails.
-  username: <%= ENV.fetch("QUIZ_DATABASE_USERNAME") %>
+  username: <%= Rails.application.credentials.config[:database][:username] %>
 
   # The password associated with the postgres role (username).
-  password: <%= ENV.fetch("QUIZ_DATABASE_PASSWORD") %>
+  password: <%= Rails.application.credentials.config[:database][:password] %>
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
   # domain sockets, so uncomment these lines.
-  host: <%= ENV.fetch("QUIZ_DATABASE_HOST") %>
+  host: <%= Rails.application.credentials.config[:database][:host] %>
 
   # The TCP port the server listens on. Defaults to 5432.
   # If your server runs on a different port number, change accordingly.
-  port: <%= ENV.fetch("QUIZ_DATABASE_PORT", 5432) %>
+  port: <%= Rails.application.credentials.config[:database][:port] %>
 
 development:
   <<: *default

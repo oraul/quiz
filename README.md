@@ -34,6 +34,12 @@ A estrutura a ser seguida é essa:
 ```yaml
 auth_adapter:
   secret_key: 'XXX'
+
+database:
+  host: 'db'
+  port: 5432
+  username: 'postgres'
+  password: 'postgres'
 ```
 
 Acesse o bash:
