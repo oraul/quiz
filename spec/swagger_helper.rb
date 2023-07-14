@@ -82,7 +82,7 @@ RSpec.configure do |config|
             type: 'object',
             properties: {
               id: { type: 'string', format: 'uuid', readOnly: true },
-              user_id: { type: 'string', format: 'uuid' },
+              user_id: { type: 'string', format: 'uuid', readOnly: true },
               alternative_id: { type: 'string', format: 'uuid' },
               created_at: { type: 'string', format: 'date-time', readOnly: true },
               updated_at: { type: 'string', format: 'date-time', readOnly: true },
@@ -93,7 +93,6 @@ RSpec.configure do |config|
           AnswerError: {
             type: 'object',
             properties: {
-              user_id: { type: 'array', items: { type: 'string' } },
               alternative_id: { type: 'array', items: { type: 'string' } }
             }
           },

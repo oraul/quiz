@@ -39,7 +39,7 @@ RSpec.describe '/answers' do
         schema '$ref' => '#/components/schemas/Answer'
 
         let(:answer) do
-          { user_id: current_user.sub, alternative_id: create(:alternative).id }
+          { alternative_id: create(:alternative).id }
         end
 
         it 'returns a 201 response' do |example|
@@ -69,7 +69,7 @@ RSpec.describe '/answers' do
         schema '$ref' => '#/components/schemas/AnswerError'
 
         let(:answer) do
-          { user_id: nil, alternative_id: nil }
+          { alternative_id: nil }
         end
 
         it 'returns a 422 response' do |example|

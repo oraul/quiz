@@ -17,6 +17,7 @@ class AnswersController < ApplicationController
   # POST /answers.json
   def create
     @answer = Answer.new(answer_params)
+    @answer.user_id = current_user.sub
 
     if @answer.save
       render :show, status: :created, location: alternative_url(@answer.alternative_id)
@@ -40,6 +41,6 @@ class AnswersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def answer_params
-    params.require(:answer).permit(:user_id, :alternative_id)
+    params.require(:answer).permit(:alternative_id)
   end
 end

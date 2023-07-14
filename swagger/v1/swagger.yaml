@@ -633,6 +633,7 @@ components:
         user_id:
           type: string
           format: uuid
+          readOnly: true
         alternative_id:
           type: string
           format: uuid
@@ -658,10 +659,6 @@ components:
     AnswerError:
       type: object
       properties:
-        user_id:
-          type: array
-          items:
-            type: string
         alternative_id:
           type: array
           items:
