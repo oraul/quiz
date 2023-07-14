@@ -64,7 +64,7 @@ RSpec.configure do |config|
               id: { type: 'string', format: 'uuid' },
               description: { type: 'string' },
               correct: { type: 'boolean' },
-              question_id: { type: 'string', format: 'uuid' },
+              question_id: { type: 'string', format: 'uuid', readOnly: true },
               created_at: { type: 'string', format: 'date-time', readOnly: true },
               updated_at: { type: 'string', format: 'date-time', readOnly: true }
             },
