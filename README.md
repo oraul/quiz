@@ -60,7 +60,7 @@ docker-compose run --rm app bin/setup
 ```
 
 Inicialize a aplicação:
-````sh
+```sh
 docker-compose up
 ```
 
