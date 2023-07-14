@@ -13,7 +13,7 @@ RSpec.describe '/questions' do
       parameter name: :by_enunciation_like, in: :query, type: :string, required: false
 
       response '200', 'question found' do
-        let(:questions) { create_list(:question, 2, :with_alternatives) }
+        let(:questions) { create_list(:question, 2) }
 
         schema type: :array,
                items: { '$ref' => '#/components/schemas/Question' }
@@ -75,6 +75,18 @@ RSpec.describe '/questions' do
                 correct: false
               },
               {
+                description: 'Wrong Alternative',
+                correct: false
+              },
+              {
+                description: 'Wrong Alternative',
+                correct: false
+              },
+              {
+                description: 'Wrong Alternative',
+                correct: false
+              },
+              {
                 description: 'Correct Alternative',
                 correct: true
               }
@@ -85,7 +97,7 @@ RSpec.describe '/questions' do
         it 'returns a 201 response' do |example|
           expect do
             submit_request(example.metadata)
-          end.to change(Question, :count).by(1).and(change(Alternative, :count).by(2))
+          end.to change(Question, :count).by(1).and(change(Alternative, :count).by(5))
 
           assert_response_matches_metadata(example.metadata)
         end
@@ -128,7 +140,7 @@ RSpec.describe '/questions' do
       response '200', 'question found' do
         schema '$ref' => '#/components/schemas/Question'
 
-        let(:id) { create(:question, :with_alternatives).id }
+        let(:id) { create(:question).id }
 
         run_test!
       end
@@ -161,7 +173,7 @@ RSpec.describe '/questions' do
       parameter name: :id, in: :path, type: :string
       parameter name: :question, in: :body, schema: { '$ref' => '#/components/schemas/Question' }
 
-      let(:record) { create(:question, :with_alternatives) }
+      let(:record) { create(:question) }
 
       let(:record_child) { record.alternatives.first }
 
@@ -225,7 +237,7 @@ RSpec.describe '/questions' do
       parameter name: :id, in: :path, type: :string
 
       response '204', 'question deleted' do
-        let(:id) { create(:question, :with_alternatives).id }
+        let(:id) { create(:question).id }
 
         it 'returns a 204 response' do |example|
           expect { submit_request(example.metadata) }.to(

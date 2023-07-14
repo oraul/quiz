@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class Question < ApplicationRecord
-  validates :enunciation, presence: true
+  validates :enunciation, :alternatives, presence: true
+  validates :alternatives, length: { is: 5, wrong_length: 'is the wrong length (should be %<count>s objects)' }
+  validates_associated :alternatives
 
   belongs_to :topic
   has_many :alternatives, dependent: :delete_all

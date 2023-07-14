@@ -5,11 +5,8 @@ FactoryBot.define do
     sequence(:enunciation) { |i| "Question #{i}" }
     topic
 
-    trait :with_alternatives do
-      after(:create) do |question|
-        create(:alternative, question:)
-        create(:alternative, correct: true, question:)
-      end
+    after(:build) do |question|
+      question.alternatives = build_list(:alternative, 5, question: nil)
     end
   end
 end

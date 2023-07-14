@@ -741,6 +741,10 @@ components:
           type: array
           items:
             type: string
+        alternatives:
+          type: array
+          items:
+            type: string
         alternatives.description:
           type: array
           items:

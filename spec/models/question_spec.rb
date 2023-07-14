@@ -7,6 +7,13 @@ RSpec.describe Question do
 
   describe 'validations' do
     it { is_expected.to validate_presence_of(:enunciation) }
+
+    it 'is expected to validate that the length of :alternatives is 5' do
+      question.alternatives = []
+      question.valid?
+      expect(question.errors[:alternatives]).to contain_exactly("can't be blank",
+                                                                'is the wrong length (should be 5 objects)')
+    end
   end
 
   describe 'associations' do
