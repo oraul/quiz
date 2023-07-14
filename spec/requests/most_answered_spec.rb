@@ -11,9 +11,9 @@ RSpec.describe '/most_answered' do
 
       response '200', 'most answered found' do
         schema type: :array,
-               items: { '$ref' => '#/components/schemas/MostAnswered/Discipline' }
+               items: { '$ref' => '#/components/schemas/MostAnsweredDiscipline' }
 
-        let(:answer) { create(:answer) }
+        before { create(:answer) }
 
         run_test!
       end

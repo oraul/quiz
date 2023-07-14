@@ -113,7 +113,7 @@ RSpec.configure do |config|
               name: { type: 'array', items: { type: 'string' } }
             }
           },
-          'MostAnswered/Discipline': {
+          MostAnsweredDiscipline: {
             type: 'object',
             properties: {
               id: { type: 'string', format: 'uuid' },
