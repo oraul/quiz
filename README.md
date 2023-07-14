@@ -99,6 +99,7 @@ docker-compose run --rm app bin/ci.sh
 - Criar um tópico primeiro
 - Filtrar a listagem com os parâmetros by_topic_id e by_enunciation_like
 - Preencher 5 alternativas e uma precisa ter o correct=true
+- Adicionar o id para atualizar a alternativa: `{ "alternatives_attributes": [{ "id": "alternative_id" }]}`
 
 ### /answers
 
