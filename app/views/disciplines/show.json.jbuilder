@@ -1,3 +1,5 @@
 # frozen_string_literal: true
 
-json.partial! 'disciplines/discipline', discipline: @discipline
+json.cache! ['v1', @discipline] do
+  json.partial! 'disciplines/discipline', discipline: @discipline
+end
