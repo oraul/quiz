@@ -11,6 +11,6 @@ class AlternativesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_alternative
-    @alternative = Alternative.cache_by(params[:id])
+    @alternative = Alternative.find(params[:id])
   end
 end
