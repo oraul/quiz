@@ -61,12 +61,12 @@ RSpec.configure do |config|
           Alternative: {
             type: 'object',
             properties: {
-              id: { type: 'string', format: 'uuid' },
+              id: { type: 'string', format: 'uuid', readOnly: true },
               description: { type: 'string' },
               correct: { type: 'boolean' },
               question_id: { type: 'string', format: 'uuid' },
-              created_at: { type: 'string', format: 'date-time' },
-              updated_at: { type: 'string', format: 'date-time' }
+              created_at: { type: 'string', format: 'date-time', readOnly: true },
+              updated_at: { type: 'string', format: 'date-time', readOnly: true }
             },
             required: %w[id description question_id correct created_at updated_at]
           },
@@ -81,12 +81,12 @@ RSpec.configure do |config|
           Answer: {
             type: 'object',
             properties: {
-              id: { type: 'string', format: 'uuid' },
+              id: { type: 'string', format: 'uuid', readOnly: true },
               user_id: { type: 'string', format: 'uuid' },
               alternative_id: { type: 'string', format: 'uuid' },
-              created_at: { type: 'string', format: 'date-time' },
-              updated_at: { type: 'string', format: 'date-time' },
-              url: { type: 'string', format: 'url' }
+              created_at: { type: 'string', format: 'date-time', readOnly: true },
+              updated_at: { type: 'string', format: 'date-time', readOnly: true },
+              url: { type: 'string', format: 'url', readOnly: true }
             },
             required: %w[id user_id alternative_id created_at updated_at url]
           },
@@ -100,11 +100,11 @@ RSpec.configure do |config|
           Discipline: {
             type: 'object',
             properties: {
-              id: { type: 'string', format: 'uuid' },
+              id: { type: 'string', format: 'uuid', readOnly: true },
               name: { type: 'string' },
-              created_at: { type: 'string', format: 'date-time' },
-              updated_at: { type: 'string', format: 'date-time' },
-              url: { type: 'string', format: 'url' }
+              created_at: { type: 'string', format: 'date-time', readOnly: true },
+              updated_at: { type: 'string', format: 'date-time', readOnly: true },
+              url: { type: 'string', format: 'url', readOnly: true }
             },
             required: %w[id name created_at updated_at url]
           },
@@ -125,13 +125,13 @@ RSpec.configure do |config|
           Question: {
             type: 'object',
             properties: {
-              id: { type: 'string', format: 'uuid' },
+              id: { type: 'string', format: 'uuid', readOnly: true },
               enunciation: { type: 'string' },
               topic_id: { type: 'string', format: 'uuid' },
               alternatives: { type: 'array', items: { '$ref' => '#/components/schemas/Alternative' } },
-              created_at: { type: 'string', format: 'date-time' },
-              updated_at: { type: 'string', format: 'date-time' },
-              url: { type: 'string', format: 'url' }
+              created_at: { type: 'string', format: 'date-time', readOnly: true },
+              updated_at: { type: 'string', format: 'date-time', readOnly: true },
+              url: { type: 'string', format: 'url', readOnly: true }
             },
             required: %w[id enunciation created_at updated_at url]
           },
@@ -148,12 +148,12 @@ RSpec.configure do |config|
           Topic: {
             type: 'object',
             properties: {
-              id: { type: 'string', format: 'uuid' },
+              id: { type: 'string', format: 'uuid', readOnly: true },
               name: { type: 'string' },
               discipline_id: { type: 'string', format: 'uuid' },
-              created_at: { type: 'string', format: 'date-time' },
-              updated_at: { type: 'string', format: 'date-time' },
-              url: { type: 'string', format: 'url' }
+              created_at: { type: 'string', format: 'date-time', readOnly: true },
+              updated_at: { type: 'string', format: 'date-time', readOnly: true },
+              url: { type: 'string', format: 'url', readOnly: true }
             },
             required: %w[id name created_at updated_at url]
           },
