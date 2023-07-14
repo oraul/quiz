@@ -40,3 +40,7 @@ RSpec/NestedGroups:
 RSpec/VariableName:
   AllowedPatterns:
     - ^Authorization$
+
+Rails/SkipsModelValidations:
+  AllowedMethods:
+    - upsert_all

@@ -27,9 +27,34 @@ echo 'ce2d296a8b7cd61f694cc1d9bd40fb2f' >> config/credentials/development.key
 echo '0898d4538c049d48906f4de4a921cc6c' >> config/credentials/test.key
 ```
 
-Inicialize a aplicação:
+Caso tenha algum erro para salvar as credenciais:
+
+A estrutura a ser seguida é essa:
+
+```yaml
+auth_adapter:
+  secret_key: 'XXX'
+```
+
+Acesse o bash:
 
 ```sh
+docker-compose run --rm app bash
+
+apk add vim
+
+EDITOR=vim rails credentials:edit --environment development
+EDITOR=vim rails credentials:edit --environment test
+```
+
+Inicialize o banco de dados:
+
+```sh
+docker-compose run --rm app bin/setup
+```
+
+Inicialize a aplicação:
+````sh
 docker-compose up
 ```
 
@@ -38,7 +63,7 @@ Como a api precisa de um token, gere um para o desenvolvimento:
 docker compose run --rm app bin/rails dev:generate_token
 ```
 
-Depois acesse o swagger:
+Acesse o swagger:
 ```
 http://localhost:3000/api-docs
 ```
