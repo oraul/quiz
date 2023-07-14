@@ -260,6 +260,14 @@ paths:
           description: unauthorized
         '404':
           description: discipline not found
+  "/health":
+    get:
+      summary: Retrieves application health
+      tags:
+      - Health
+      responses:
+        '204':
+          description: application is health
   "/most_answered/disciplines":
     get:
       summary: Retrieves most answered discipline list
