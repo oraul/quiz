@@ -11,8 +11,13 @@ RSpec.describe Question do
     it 'is expected to validate that the length of :alternatives is 5' do
       question.alternatives = []
       question.valid?
-      expect(question.errors[:alternatives]).to contain_exactly("can't be blank",
-                                                                'is the wrong length (should be 5 objects)')
+      expect(question.errors[:alternatives]).to include('is the wrong length (should be 5 objects)')
+    end
+
+    it 'is expected to validate that one alternative is correct' do
+      question.alternatives = build_list(:alternative, 5, question: nil)
+      question.valid?
+      expect(question.errors[:alternatives]).to include('is the wrong length (should be 1 correct=true)')
     end
   end
 

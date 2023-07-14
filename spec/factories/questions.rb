@@ -6,7 +6,8 @@ FactoryBot.define do
     topic
 
     after(:build) do |question|
-      question.alternatives = build_list(:alternative, 5, question: nil)
+      question.alternatives = build_list(:alternative, 4,
+                                         question: nil) << build(:alternative, question: nil, correct: true)
     end
   end
 end
