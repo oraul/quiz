@@ -61,7 +61,7 @@ RSpec.configure do |config|
           Alternative: {
             type: 'object',
             properties: {
-              id: { type: 'string', format: 'uuid', readOnly: true },
+              id: { type: 'string', format: 'uuid' },
               description: { type: 'string' },
               correct: { type: 'boolean' },
               question_id: { type: 'string', format: 'uuid' },
@@ -128,7 +128,7 @@ RSpec.configure do |config|
               id: { type: 'string', format: 'uuid', readOnly: true },
               enunciation: { type: 'string' },
               topic_id: { type: 'string', format: 'uuid' },
-              alternatives: { type: 'array', items: { '$ref' => '#/components/schemas/Alternative' } },
+              alternatives_attributes: { type: 'array', items: { '$ref' => '#/components/schemas/Alternative' } },
               created_at: { type: 'string', format: 'date-time', readOnly: true },
               updated_at: { type: 'string', format: 'date-time', readOnly: true },
               url: { type: 'string', format: 'url', readOnly: true }

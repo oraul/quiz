@@ -586,7 +586,6 @@ components:
         id:
           type: string
           format: uuid
-          readOnly: true
         description:
           type: string
         correct:
@@ -723,7 +722,7 @@ components:
         topic_id:
           type: string
           format: uuid
-        alternatives:
+        alternatives_attributes:
           type: array
           items:
             "$ref": "#/components/schemas/Alternative"
